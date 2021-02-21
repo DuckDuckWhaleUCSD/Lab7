@@ -82,8 +82,16 @@
 			document.getElementById('recordForm').style = 'display: none';
 			document.getElementById('recordIDcontainer').style = 'display: none';
 			fetch(document.getElementById('endpoint').value)
-				.then(response => response.json())
+				.then(response => {
+					if (response.status === 200 || response.status === 201 || response.status === 204) {
+						return response.json();
+					} else {
+						document.getElementById('output').textContent = 'Network error: ' + response.status;
+						return null;
+					}
+				})
 				.then(data => {
+					if (data === null) return;
 					let output = JSON.stringify(data);
 					document.getElementById('output').textContent = output;
 				});
@@ -100,8 +108,16 @@
 			setTimeout(() => {
 				let id = window.prompt('Enter record ID');
 				fetch(document.getElementById('endpoint').value + '/' + id)
-					.then(response => response.json())
+					.then(response => {
+						if (response.status === 200 || response.status === 201 || response.status === 204) {
+							return response.json();
+						} else {
+							document.getElementById('output').textContent = 'Network error: ' + response.status;
+							return null;
+						}
+					})
 					.then(data => {
+						if (data === null) return;
 						let output = JSON.stringify(data);
 						document.getElementById('output').textContent = output;
 					});
@@ -131,8 +147,16 @@
 						})
 					}
 				)
-					.then(response => response.json())
+					.then(response => {
+						if (response.status === 200 || response.status === 201 || response.status === 204) {
+							return response.json();
+						} else {
+							document.getElementById('output').textContent = 'Network error: ' + response.status;
+							return null;
+						}
+					})
 					.then(data => {
+						if (data === null) return;
 						let output = JSON.stringify(data);
 						document.getElementById('output').textContent = output;
 					});
@@ -165,8 +189,16 @@
 						})
 					}
 				)
-					.then(response => response.json())
+					.then(response => {
+						if (response.status === 200 || response.status === 201 || response.status === 204) {
+							return response.json();
+						} else {
+							document.getElementById('output').textContent = 'Network error: ' + response.status;
+							return null;
+						}
+					})
 					.then(data => {
+						if (data === null) return;
 						let output = JSON.stringify(data);
 						document.getElementById('output').textContent = output;
 					});
@@ -188,8 +220,16 @@
 			setTimeout(() => {
 				let id = window.prompt('Enter record ID');
 				fetch(document.getElementById('endpoint').value + '/' + id, { method: 'DELETE' })
-					.then(response => response.json())
+					.then(response => {
+						if (response.status === 200 || response.status === 201 || response.status === 204) {
+							return response.json();
+						} else {
+							document.getElementById('output').textContent = 'Network error: ' + response.status;
+							return null;
+						}
+					})
 					.then(data => {
+						if (data === null) return;
 						let output = JSON.stringify(data);
 						document.getElementById('output').textContent = output;
 					});
