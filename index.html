@@ -71,6 +71,8 @@
 
 	<!-- Main Script -->
 	<script type="module">
+		'use strict';
+
 		// This function should fetch all of the data from the given endpoint.
 		// From the 4 CRUD actions, this is the READ action, and uses the GET http method.
 		// The main difference from fetchOne() will be the URL you request from; check
@@ -106,8 +108,33 @@
 		// From the 4 CRUD actions, this is the CREATE action, and uses the POST http method.
 		// The main difference from updateRecord() will be the URL you send data to; check
 		// the writeup to view the URL pattern for create and update
-		function createRecord() {
-			// TODO
+		function createRecord(action) {
+			document.getElementById('output').textContent = '';
+			if (action === 'show') {
+				document.getElementById('recordForm').style = 'display: block';
+			} else if (action === 'submit') {
+				fetch(
+					document.getElementById('endpoint').value,
+					{
+						method: 'POST',
+						headers: {
+							'content-type': 'application/json'
+						},
+						body: JSON.stringify({
+							author: document.getElementById('author').value,
+							title: document.getElementById('title').value
+						})
+					}
+				)
+					.then(response => response.json())
+					.then(data => {
+						let output = JSON.stringify(data);
+						document.getElementById('output').textContent = output;
+					});
+			} else {
+				document.getElementById('output').textContent =
+					'Error: createRecord() received invalid parameter';
+			}
 		}
 
 		// This function should use fetch to update one existing entry in the given endpoint.
