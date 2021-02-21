@@ -76,6 +76,7 @@
 		// The main difference from fetchOne() will be the URL you request from; check
 		// the writeup to view the URL pattern for fetch one and fetch all
 		function fetchAll() {
+			document.getElementById('output').textContent = '';
 			fetch(document.getElementById('endpoint').value)
 				.then(response => response.json())
 				.then(data => {
@@ -89,7 +90,16 @@
 		// The main difference from fetchAll() will be the URL you request from; check
 		// the writeup to view the URL pattern for fetch one and fetch all
 		function fetchOne() {
-			// TODO
+			document.getElementById('output').textContent = '';
+			setTimeout(() => {
+				let id = window.prompt('Enter record ID');
+				fetch(document.getElementById('endpoint').value + '/' + id)
+					.then(response => response.json())
+					.then(data => {
+						let output = JSON.stringify(data);
+						document.getElementById('output').textContent = output;
+					});
+			}, 0);
 		}
 
 		// This function should use fetch to create one entry in the given endpoint.
