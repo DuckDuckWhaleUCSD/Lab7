@@ -79,6 +79,7 @@
 		// the writeup to view the URL pattern for fetch one and fetch all
 		function fetchAll() {
 			document.getElementById('output').textContent = '';
+			document.getElementById('recordForm').style = 'display: none';
 			fetch(document.getElementById('endpoint').value)
 				.then(response => response.json())
 				.then(data => {
@@ -93,6 +94,7 @@
 		// the writeup to view the URL pattern for fetch one and fetch all
 		function fetchOne() {
 			document.getElementById('output').textContent = '';
+			document.getElementById('recordForm').style = 'display: none';
 			setTimeout(() => {
 				let id = window.prompt('Enter record ID');
 				fetch(document.getElementById('endpoint').value + '/' + id)
